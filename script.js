@@ -16,19 +16,34 @@ function toggleMobile() {
 }
 
 function submitForm() {
-  const name = document.getElementById('cName').value.trim();
-  const email = document.getElementById('cEmail').value.trim();
-  const msg = document.getElementById('cMsg').value.trim();
-  if (!name || !email) {
-    alert('Please fill in your name and email.');
+  let name = document.getElementById("cName").value;
+  let email = document.getElementById("cEmail").value;
+  let phone = document.getElementById("cPhone").value;
+  let product = document.getElementById("cProduct").value;
+  let message = document.getElementById("cMsg").value;
+
+  if(!name || !email || !phone){
+    alert("Please fill all required fields");
     return;
   }
-  document.getElementById('formSuccess').classList.add('show');
-  document.getElementById('cName').value = '';
-  document.getElementById('cEmail').value = '';
-  document.getElementById('cPhone').value = '';
-  document.getElementById('cMsg').value = '';
-  document.getElementById('cProduct').value = '';
+
+  let whatsappMessage = 
+`New Inquiry Received:
+
+Name: ${name}
+Email: ${email}
+Phone: ${phone}
+Product: ${product}
+Message: ${message}`;
+
+  let encodedMessage = encodeURIComponent(whatsappMessage);
+
+  // Replace with your WhatsApp number (with country code, no +)
+  let phoneNumber = "917359826325";
+
+  let url = `https://wa.me/${7359826325}?text=${encodedMessage}`;
+
+  window.open(url, "_blank");
 }
 
 // Set active nav link on load
